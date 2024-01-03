@@ -1,9 +1,6 @@
 spring:
-  application:
-    name: EcommerceUsers
   datasource:
-    driver-class-name: org.postgresql.Driver
-    ulr: jdbc:postgresql://localhost:5432/ecommerceUsers
+    url: jdbc:postgresql://localhost:5432/ecommerceUsers
     username: postgres
     password: admin
     jpa:
@@ -11,4 +8,4 @@ spring:
       hibernate:
         ddl-auto: update
       open-in-view: false
-      database-platform: org.hibernate.dialect.PostgresSQLDialect
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
