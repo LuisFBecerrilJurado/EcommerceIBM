@@ -1,15 +1,14 @@
 package com.example.Products.repository;
 
 import com.example.Products.model.Product;
-import com.example.Products.model.User;
+import java.util.Collection;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductsRepository {
-  Iterable<Product> getProducts();
-  Iterable<Product> getProductsByUser(User user);
-  Product getProductById(Long id);
-  Product saveProduct(Product product);
-  void deleteProductById(Long id);
+public interface ProductsRepository extends CrudRepository<Product,Long> {
 
+  @Query("SELECT p FROM Product p WHERE p.name like %?1%")
+  Collection<Product> findLikeName (String name);
 }
