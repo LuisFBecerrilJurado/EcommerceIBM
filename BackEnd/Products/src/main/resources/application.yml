@@ -1,11 +1,13 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ecommerceProducts
+    url: jdbc:postgresql://localhost:5432/ecommercedb
     username: postgres
     password: admin
     jpa:
       show-sql: true
       hibernate:
         ddl-auto: update
-      open-in-view: false
       database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 9090
