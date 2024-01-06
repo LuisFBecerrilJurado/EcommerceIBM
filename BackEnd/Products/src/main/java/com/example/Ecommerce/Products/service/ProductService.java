@@ -5,9 +5,9 @@ import com.example.Ecommerce.Users.model.Users;
 import org.springframework.http.ResponseEntity;
 
 public interface ProductService {
-  public ResponseEntity<?> getProducts();
-  public ResponseEntity<?> getProductsByUser(Users user);
-  public ResponseEntity<?> getProductByName(String name);
+  public Iterable<Product> getProducts();
+  public Iterable<Product> getProductsByUser(Users user);
+  Product getProductById(Integer id);
   Product saveProduct(Product product);
-  void deleteProductById(Long id);
+  void deleteProductById(Integer id);
 }

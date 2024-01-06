@@ -1,13 +1,12 @@
 package com.example.Ecommerce.Products.model;
 
 import com.example.Ecommerce.Users.model.Users;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,16 +14,16 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import javax.persistence.*;
+import lombok.ToString;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Data
 @AllArgsConstructor
 @Entity
 @Table(name = "products")
-@EntityListeners(AuditingEntityListener.class)
+@ToString
 
-public class Product implements Serializable {
+public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,13 +32,15 @@ public class Product implements Serializable {
   @Column(nullable = false)
   private String name;
 
+  private  String code;
+
   @Column(nullable = false)
   private String description;
 
   private BigDecimal price;
 
   @Column(nullable = false)
-  private String img;
+  private String image;
 
   @Column(nullable = false)
   @Temporal(TemporalType.TIMESTAMP)
@@ -50,12 +51,11 @@ public class Product implements Serializable {
   @LastModifiedDate
   private Date dateUpdate;
 
+  @ManyToOne
   private Users users;
+
   public Product() {
     this.setCode(UUID.randomUUID().toString());
-  }
-
-  private void setCode(String string) {
   }
 
 }
