@@ -3,9 +3,10 @@ package com.example.Ecommerce.Products.service;
 import com.example.Ecommerce.Products.model.Product;
 import com.example.Ecommerce.Products.repository.ProductsRepository;
 import com.example.Ecommerce.Users.model.Users;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class  ProductServiceImpl implements ProductService{
@@ -15,26 +16,30 @@ public class  ProductServiceImpl implements ProductService{
 
   @Override
   public Iterable<Product> getProducts() {
-    return productsRepository.getProducts();
+    return productsRepository.findAll();
   }
 
   @Override
   public Iterable<Product> getProductsByUser(Users user) {
-    return productsRepository.getProductsByUser(user);
+    return ProductsRepository.mapProducts(productsRepository.findByUser());
+
+    return productMapper.toProducts(productCrudRepository.findByUserEntity(userMapper.toUserEntity(user)) );
   }
 
   @Override
-  public Product getProductById(Integer id) {
-    return productsRepository.getProductById(id);
+  public Optional<Product> getProductById(Integer id) {
+    return productsRepository.findById(id);
   }
 
   @Override
   public Product saveProduct(Product product) {
-    return productsRepository.saveProduct(product);
+    return null;
   }
 
   @Override
   public void deleteProductById(Integer id) {
-    productsRepository.deleteProductById(id);
+
   }
+
+
 }

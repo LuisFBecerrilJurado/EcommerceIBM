@@ -2,6 +2,7 @@ package com.example.Ecommerce.Products.model;
 
 import com.example.Ecommerce.Users.model.Users;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -27,30 +28,17 @@ public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
+  private Integer id;
   @Column(nullable = false)
   private String name;
-
   private  String code;
-
   @Column(nullable = false)
   private String description;
-
   private BigDecimal price;
-
   @Column(nullable = false)
   private String image;
-
-  @Column(nullable = false)
-  @Temporal(TemporalType.TIMESTAMP)
-  private Date dateCreated;
-
-  @Column(nullable = false)
-  @Temporal(TemporalType.TIMESTAMP)
-  @LastModifiedDate
-  private Date dateUpdate;
-
+  private LocalDateTime dateCreated;
+  private LocalDateTime dateUpdate;
   @ManyToOne
   private Users users;
 
