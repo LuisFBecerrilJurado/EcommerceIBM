@@ -2,8 +2,7 @@ package com.example.Ecommerce.Products.service;
 
 import com.example.Ecommerce.Products.model.Product;
 import com.example.Ecommerce.Products.repository.ProductsRepository;
-import com.example.Ecommerce.Users.model.Users;
-import java.util.Optional;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,21 +18,17 @@ public class  ProductServiceImpl implements ProductService{
     return productsRepository.findAll();
   }
 
-  @Override
-  public Iterable<Product> getProductsByUser(Users user) {
-    return ProductsRepository.mapProducts(productsRepository.findByUser());
-
-    return productMapper.toProducts(productCrudRepository.findByUserEntity(userMapper.toUserEntity(user)) );
-  }
 
   @Override
-  public Optional<Product> getProductById(Integer id) {
-    return productsRepository.findById(id);
+  public Product getProductById(Integer id) {
+    return ProductsRepository.mapProduct(productsRepository.findById(id).get());
   }
 
   @Override
   public Product saveProduct(Product product) {
-    return null;
+    product.setDateCreated(LocalDateTime.now());
+    product.setDateUpdate(LocalDateTime.now());
+    return productsRepository.save(product);
   }
 
   @Override

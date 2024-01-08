@@ -1,13 +1,15 @@
 spring:
+  application:
+    name: spring-jpa
   datasource:
-    url: jdbc:postgresql://localhost:5432/ecommercedb
-    username: postgres
-    password: admin
-    jpa:
-      show-sql: true
-      hibernate:
-        ddl-auto: update
-      database-platform: org.hibernate.dialect.PostgreSQLDialect
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db4free.net:3306/acmicroserv_1?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: fran_18
+    password: academia_ibm
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
 
 server:
   port: 9090

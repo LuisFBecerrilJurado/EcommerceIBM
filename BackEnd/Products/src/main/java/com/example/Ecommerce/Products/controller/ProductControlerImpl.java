@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class ProductControlerImpl {
 
-
+  @Autowired
+  ProductService productService;
   @GetMapping("/create")
   public String create(){
     return "admin/products/create";
@@ -23,6 +24,8 @@ public class ProductControlerImpl {
   @PostMapping("/save-product")
   public String saveProduct(Product product){
     log.info("Nombre del Producto: {}", product);
-    return "admin/products/create";
+    productService.saveProduct(product);
+    //return "admin/products/create";
+    return "redirect:/admin";
   }
 }

@@ -13,7 +13,6 @@ public interface ProductsRepository extends CrudRepository<Product,Integer>{
   @Query("SELECT p FROM Product p WHERE p.name like %?1%")
   Collection<Product> findLikeName (String name);
 
-  Iterable<Product> findByUser ();
   public static Iterable<Product> mapProducts(Iterable<Product> product) {
     if ( product == null ) {
       return null;
@@ -21,13 +20,13 @@ public interface ProductsRepository extends CrudRepository<Product,Integer>{
 
     ArrayList<Product> iterable = new ArrayList<Product>();
     for ( Product products : product ) {
-      iterable.add( toProduct( products ) );
+      iterable.add( mapProduct( products ) );
     }
 
     return iterable;
   }
 
-  public Product mapProduct(Product product) {
+  public static Product mapProduct(Product product) {
     if ( product == null ) {
       return null;
     }
