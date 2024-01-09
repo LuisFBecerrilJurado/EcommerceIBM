@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,19 +24,27 @@ public class ProductControlerImpl implements ProductController{
     return "admin/products/create";
   }
 
-
   @PostMapping("/save-product")
   public String saveProduct(Product product){
     log.info("Nombre del Producto: {}", product);
     productService.saveProduct(product);
-    //return "admin/products/create";
     return "redirect:/admin";
   }
 
+  @Override
   @GetMapping("/show")
   public String showProduct(Model model) {
     Iterable<Product> products = productService.getProducts();
     model.addAttribute("products",products);
     return "admin/products/show";
+  }
+
+  @Override
+  @GetMapping("/edit/{id}")
+  public String editProduct(@PathVariable Integer id, Model model){
+    Product product = productService.getProductById(id);
+    log.info("Producto obtenido:{}",product);
+    model.addAttribute("product",product);
+    return "admin/products/edit";
   }
 }

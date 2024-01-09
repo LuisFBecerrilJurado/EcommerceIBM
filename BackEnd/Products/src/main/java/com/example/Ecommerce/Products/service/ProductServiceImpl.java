@@ -26,9 +26,17 @@ public class  ProductServiceImpl implements ProductService{
 
   @Override
   public Product saveProduct(Product product) {
-    product.setDateCreated(LocalDateTime.now());
-    product.setDateUpdate(LocalDateTime.now());
-    return productsRepository.save(product);
+    if(product.getId()==null){
+      product.setDateCreated(LocalDateTime.now());
+      product.setDateUpdate(LocalDateTime.now());
+      return productsRepository.save(product);
+    }else{
+      Product productExist = ProductsRepository.mapProduct(productsRepository.findById(product.getId()).get());
+      product.setCode(productExist.getCode());
+      product.setDateCreated(productExist.getDateCreated());
+      product.setDateUpdate(LocalDateTime.now());
+      return productsRepository.save(product);
+    }
   }
 
   @Override
