@@ -31,7 +31,7 @@ public class ProductControlerImpl implements ProductController{
     return "redirect:/admin";
   }
 
-  @Override
+
   @GetMapping("/show")
   public String showProduct(Model model) {
     Iterable<Product> products = productService.getProducts();
@@ -39,12 +39,19 @@ public class ProductControlerImpl implements ProductController{
     return "admin/products/show";
   }
 
-  @Override
+
   @GetMapping("/edit/{id}")
   public String editProduct(@PathVariable Integer id, Model model){
     Product product = productService.getProductById(id);
     log.info("Producto obtenido:{}",product);
     model.addAttribute("product",product);
     return "admin/products/edit";
+  }
+
+
+  @GetMapping("/delete/{id}")
+  public String deleteProduct(@PathVariable Integer id) {
+    productService.deleteProductById(id);
+    return "redirect:/admin/products/show";
   }
 }
