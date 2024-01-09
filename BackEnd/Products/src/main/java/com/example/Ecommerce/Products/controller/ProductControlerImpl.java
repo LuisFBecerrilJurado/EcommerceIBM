@@ -28,7 +28,7 @@ public class ProductControlerImpl implements ProductController{
   public String saveProduct(Product product){
     log.info("Nombre del Producto: {}", product);
     productService.saveProduct(product);
-    return "redirect:/admin";
+    return "redirect:/admin/products/show";
   }
 
 
